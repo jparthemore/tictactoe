@@ -4,9 +4,8 @@ const App = {
   rootElement: '#app',
   numRows: 3,
   numCols: 3,
-  cellWidth:50,
-  cellHeight:50,
-  owner: '',
+  rowHeight: 50,
+  owner: 'X',
   activePlayer: 'X',
   victoriousPlayer: 'none',//none!
   isThereAWinner: false,
@@ -22,7 +21,7 @@ const App = {
 
   cacheDOM: function(){
     this.root = document.querySelector(this.rootElement);
-    this.board = document.querySelector('.squares-layout');
+    this.boardLayout = document.querySelector('.squares-layout');
   },
 
   makeBoard: function(){
@@ -30,14 +29,33 @@ const App = {
     for(let i=0;i<this.numRows;i++){
       this.board[i]= new Array(this.numCols);
       for(let j=0;j<this.numCols;j++){
-        this.board[i][j]=new Square(this.cellWidth,this.cellHeight,this.owner);
+        //this.board[i][j]=new Square(this.cellWidth,this.cellHeight,this.activePlayer);
+        this.board[i][j]= new Square();
       }
     }
-    console.log(this.board);
+    //console.log(this.board);
   },
+
   resetBoard: function(){},
   bindEvents: function(){},
-  render: function(){},
+
+  render: function(){
+
+    //draw grid
+    this.boardLayout.innerHTML = '';
+    this.board.forEach((row,rowIdx)=>{
+      const rowOfSquares = document.createElement('div');
+      rowOfSquares.classList.add('row-squares');
+      //rowOfSquares.style.height = `${this.rowHeight}px`;
+      row.forEach((square,colIndex)=>{
+        const element = square.toHtml();
+        rowOfSquares.appendChild(element);
+      });
+      this.boardLayout.appendChild(rowOfSquares);
+    });
+
+
+  },
 
 
 };
