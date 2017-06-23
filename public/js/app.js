@@ -4,7 +4,6 @@ const App = {
   rootElement: '#app',
   numRows: 3,
   numCols: 3,
-  rowHeight: 50,
   activePlayer: 'X',
   winningPlayer: '',
   board: [],
@@ -54,6 +53,7 @@ const App = {
 
   clearBoard: function(){
     this.activePlayer = 'X';
+    this.winningPlayer = '';
     this.makeBoard();
     this.render();
   },
