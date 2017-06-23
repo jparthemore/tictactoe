@@ -35,6 +35,8 @@ const App = {
   bindEvents: function(){},
 
   claimSquare: function(rowIdx,colIdx){
+    if(this.winningPlayer.length > 0) return; //ignore click events if game over!
+
     if(this.board[rowIdx][colIdx].owner.length === 0){
       this.board[rowIdx][colIdx].owner = this.activePlayer;
     }
@@ -61,7 +63,7 @@ const App = {
     if((this.board[0][0].owner.length>0) &&
        (this.board[0][0].owner === this.board[0][1].owner) &&
        (this.board[0][1].owner === this.board[0][2].owner)){
-      winningPlayer = this.board[0][0].owner;
+      this.winningPlayer = this.board[0][0].owner;
       this.board[0][0].isWinningSquare = 'true';
       this.board[0][1].isWinningSquare = 'true';
       this.board[0][2].isWinningSquare = 'true';
@@ -69,7 +71,7 @@ const App = {
     else if ((this.board[1][0].owner.length >0) &&
             (this.board[1][0].owner === this.board[1][1].owner) &&
             (this.board[1][1].owner === this.board[1][2].owner)){
-        winningPlayer = this.board[1][0].owner;
+        this.winningPlayer = this.board[1][0].owner;
         this.board[1][0].isWinningSquare = 'true';
         this.board[1][1].isWinningSquare = 'true';
         this.board[1][2].isWinningSquare = 'true';
@@ -77,7 +79,7 @@ const App = {
     else if ((this.board[2][0].owner.length > 0) &&
              (this.board[2][0].owner === this.board[2][1].owner) &&
              (this.board[2][1].owner === this.board[2][2].owner)){
-        winningPlayer = this.board[2][0].owner;
+        this.winningPlayer = this.board[2][0].owner;
         this.board[2][0].isWinningSquare = 'true';
         this.board[2][1].isWinningSquare = 'true';
         this.board[2][2].isWinningSquare = 'true';
@@ -85,7 +87,7 @@ const App = {
     else if ((this.board[0][0].owner.length > 0) &&
              (this.board[0][0].owner === this.board[1][0].owner) &&
              (this.board[1][0].owner === this.board[2][0].owner)){
-        winningPlayer = this.board[0][0].owner;
+        this.winningPlayer = this.board[0][0].owner;
         this.board[0][0].isWinningSquare = 'true';
         this.board[1][0].isWinningSquare = 'true';
         this.board[2][0].isWinningSquare = 'true';
@@ -93,7 +95,7 @@ const App = {
     else if ((this.board[0][1].owner.length > 0) &&
              (this.board[0][1].owner === this.board[1][1].owner) &&
              (this.board[1][1].owner === this.board[2][1].owner)){
-        winningPlayer = this.board[0][1].owner;
+        this.winningPlayer = this.board[0][1].owner;
         this.board[0][1].isWinningSquare = 'true';
         this.board[1][1].isWinningSquare = 'true';
         this.board[2][1].isWinningSquare = 'true';
@@ -101,7 +103,7 @@ const App = {
     else if ((this.board[0][2].owner.length > 0) &&
              (this.board[0][2].owner === this.board[1][2].owner) &&
              (this.board[1][2].owner === this.board[2][2].owner)){
-        winningPlayer = this.board[0][2].owner;
+        this.winningPlayer = this.board[0][2].owner;
         this.board[0][2].isWinningSquare = 'true';
         this.board[1][2].isWinningSquare = 'true';
         this.board[2][2].isWinningSquare = 'true';
@@ -109,7 +111,7 @@ const App = {
     else if ((this.board[0][0].owner.length > 0) &&
              (this.board[0][0].owner === this.board[1][1].owner) &&
              (this.board[1][1].owner === this.board[2][2].owner)){
-        winningPlayer = this.board[0][0].owner;      ;
+        this.winningPlayer = this.board[0][0].owner;      ;
         this.board[0][0].isWinningSquare = 'true';
         this.board[1][1].isWinningSquare = 'true';
         this.board[2][2].isWinningSquare = 'true';
@@ -117,7 +119,7 @@ const App = {
     else if ((this.board[0][2].owner.length > 0) &&
              (this.board[0][2].owner === this.board[1][1].owner) &&
              (this.board[1][1].owner === this.board[2][0].owner)){
-        winningPlayer = this.board[0][2].owner;
+        this.winningPlayer = this.board[0][2].owner;
         this.board[0][2].isWinningSquare = 'true';
         this.board[1][1].isWinningSquare = 'true';
         this.board[2][0].isWinningSquare = 'true';

@@ -19,9 +19,11 @@
 }
 .claimed-by-X{
   background-color: cornflowerblue;
+  border-color: dodgerblue;
 }
 .claimed-by-O{
   background-color: lightsteelblue;
+  border-color: dodgerblue;/*deepskyblue*/
 }
 .unclaimed{
 }
