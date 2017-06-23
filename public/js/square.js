@@ -1,10 +1,3 @@
-// function Square(width, height,claimedOwner){
-//   this.width = width || 100;
-//   this.height = height || 100;
-//   this.owner = claimedOwner || '';
-//
-// }
-
 function Square(){
   this.owner ='';
 }
@@ -13,8 +6,18 @@ Square.prototype.toHtml = function(){
   //return document.createElement('button');
   const btn = document.createElement('button');
   btn.classList.add('btn-square');
-  //btn.style.width = `${this.width}px`;
-  //btn.style.height = `${this.height}px`;
-  //btn.textContent = this.owner;
+  btn.textContent = this.owner;
+  if(this.owner==='X'){
+    btn.classList.add('claimed-by-X');
+    btn.disabled = 'true';
+  }
+  else if(this.owner==='O'){
+    btn.classList.add('claimed-by-O');
+    btn.disabled = 'true';
+  }
+  else{
+    btn.classList.add('unclaimed');
+  }
+  //console.dir(btn);
   return btn;
 }
