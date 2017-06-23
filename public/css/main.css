@@ -11,6 +11,7 @@
         inset 0 0 3px 5px rgba(0,0,0,.05),
         2px 2px 4px 0 rgba(0,0,0,.25);
   font-family: sans-serif;
+  color: darkblue;
 }
 .row-squares{
   height: 50px;
@@ -24,6 +25,11 @@
 }
 .unclaimed{
 }
+.winner-square{
+  border-color: deeppink;
+  background-color: hotpink;
+}
+
 .controls-space{
   padding-top: 16px;
   text-align: center;

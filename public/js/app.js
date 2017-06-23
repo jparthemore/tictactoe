@@ -5,10 +5,8 @@ const App = {
   numRows: 3,
   numCols: 3,
   rowHeight: 50,
-  owner: '',
   activePlayer: 'X',
-  victoriousPlayer: 'none',//none!
-  isThereAWinner: false,
+  winningPlayer: '',
   board: [],
 
   start: function(){
@@ -34,14 +32,16 @@ const App = {
     }
   },
 
-  resetBoard: function(){},
   bindEvents: function(){},
 
   claimSquare: function(rowIdx,colIdx){
     if(this.board[rowIdx][colIdx].owner.length === 0){
       this.board[rowIdx][colIdx].owner = this.activePlayer;
     }
+
+    this.checkForWin();
     this.render();
+
     if(this.activePlayer==='X'){
       this.activePlayer='O';
     }
@@ -49,14 +49,81 @@ const App = {
       this.activePlayer = 'X';
     }
   },
+
   clearBoard: function(){
     this.activePlayer = 'X';
     this.makeBoard();
     this.render();
   },
 
+  checkForWin: function(){
+    //there are only 8 possible checks, but...
+    if((this.board[0][0].owner.length>0) &&
+       (this.board[0][0].owner === this.board[0][1].owner) &&
+       (this.board[0][1].owner === this.board[0][2].owner)){
+      winningPlayer = this.board[0][0].owner;
+      this.board[0][0].isWinningSquare = 'true';
+      this.board[0][1].isWinningSquare = 'true';
+      this.board[0][2].isWinningSquare = 'true';
+    }
+    else if ((this.board[1][0].owner.length >0) &&
+            (this.board[1][0].owner === this.board[1][1].owner) &&
+            (this.board[1][1].owner === this.board[1][2].owner)){
+        winningPlayer = this.board[1][0].owner;
+        this.board[1][0].isWinningSquare = 'true';
+        this.board[1][1].isWinningSquare = 'true';
+        this.board[1][2].isWinningSquare = 'true';
+    }
+    else if ((this.board[2][0].owner.length > 0) &&
+             (this.board[2][0].owner === this.board[2][1].owner) &&
+             (this.board[2][1].owner === this.board[2][2].owner)){
+        winningPlayer = this.board[2][0].owner;
+        this.board[2][0].isWinningSquare = 'true';
+        this.board[2][1].isWinningSquare = 'true';
+        this.board[2][2].isWinningSquare = 'true';
+    }
+    else if ((this.board[0][0].owner.length > 0) &&
+             (this.board[0][0].owner === this.board[1][0].owner) &&
+             (this.board[1][0].owner === this.board[2][0].owner)){
+        winningPlayer = this.board[0][0].owner;
+        this.board[0][0].isWinningSquare = 'true';
+        this.board[1][0].isWinningSquare = 'true';
+        this.board[2][0].isWinningSquare = 'true';
+    }
+    else if ((this.board[0][1].owner.length > 0) &&
+             (this.board[0][1].owner === this.board[1][1].owner) &&
+             (this.board[1][1].owner === this.board[2][1].owner)){
+        winningPlayer = this.board[0][1].owner;
+        this.board[0][1].isWinningSquare = 'true';
+        this.board[1][1].isWinningSquare = 'true';
+        this.board[2][1].isWinningSquare = 'true';
+    }
+    else if ((this.board[0][2].owner.length > 0) &&
+             (this.board[0][2].owner === this.board[1][2].owner) &&
+             (this.board[1][2].owner === this.board[2][2].owner)){
+        winningPlayer = this.board[0][2].owner;
+        this.board[0][2].isWinningSquare = 'true';
+        this.board[1][2].isWinningSquare = 'true';
+        this.board[2][2].isWinningSquare = 'true';
+    }
+    else if ((this.board[0][0].owner.length > 0) &&
+             (this.board[0][0].owner === this.board[1][1].owner) &&
+             (this.board[1][1].owner === this.board[2][2].owner)){
+        winningPlayer = this.board[0][0].owner;      ;
+        this.board[0][0].isWinningSquare = 'true';
+        this.board[1][1].isWinningSquare = 'true';
+        this.board[2][2].isWinningSquare = 'true';
+    }
+    else if ((this.board[0][2].owner.length > 0) &&
+             (this.board[0][2].owner === this.board[1][1].owner) &&
+             (this.board[1][1].owner === this.board[2][0].owner)){
+        winningPlayer = this.board[0][2].owner;
+        this.board[0][2].isWinningSquare = 'true';
+        this.board[1][1].isWinningSquare = 'true';
+        this.board[2][0].isWinningSquare = 'true';
+    }
+  },
   render: function(){
-
 
     //clear out before re-rendering!
     this.boardLayout.innerHTML = '';
@@ -69,11 +136,11 @@ const App = {
       row.forEach((square,colIdx)=>{
         const element = square.toHtml();
         element.addEventListener('click',()=>this.claimSquare(rowIdx,colIdx));
-        //console.dir(element);
         rowOfSquares.appendChild(element);
       });
       this.boardLayout.appendChild(rowOfSquares);
     });
+
     //create a 'reset' button
     const resetButton = document.createElement('button');
     resetButton.classList.add('btn');

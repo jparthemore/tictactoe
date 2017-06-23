@@ -3,7 +3,7 @@ function Square(){
 }
 
 Square.prototype.toHtml = function(){
-  //return document.createElement('button');
+
   const btn = document.createElement('button');
   btn.classList.add('btn-square');
   btn.textContent = this.owner;
@@ -18,6 +18,8 @@ Square.prototype.toHtml = function(){
   else{
     btn.classList.add('unclaimed');
   }
-  //console.dir(btn);
+  if(this.isWinningSquare){
+    btn.classList.add('winner-square');
+  }
   return btn;
 }
