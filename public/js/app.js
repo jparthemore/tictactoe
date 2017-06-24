@@ -19,6 +19,7 @@ const App = {
     this.root = document.querySelector(this.rootElement);
     this.boardLayout = document.querySelector('.squares-layout');
     this.controls = document.querySelector('.controls');
+    this.banner = document.querySelector('.banner-space');
   },
 
   makeBoard: function(){
@@ -130,6 +131,7 @@ const App = {
     //clear out before re-rendering!
     this.boardLayout.innerHTML = '';
     this.controls.innerHTML = '';
+    this.banner.innerHTML = '';
 
     //draw grid
     this.board.forEach((row,rowIdx)=>{
@@ -143,12 +145,26 @@ const App = {
       this.boardLayout.appendChild(rowOfSquares);
     });
 
+    //if winner display banner
+    console.log('winning player is: ',this.winningPlayer);
+    if(this.winningPlayer.length > 0){
+      const displayBar = document.createElement('div');
+      displayBar.classList.add('display-bar');
+      displayBar.textContent = "Game over!! " + this.winningPlayer + " has won!!!";
+      this.banner.appendChild(displayBar);
+    }
+
     //create a 'reset' button
     const resetButton = document.createElement('button');
     resetButton.classList.add('btn');
-    resetButton.textContent = 'Clear';
+    if(this.winningPlayer.length ===0)
+      resetButton.textContent = 'Clear';
+    else {
+      resetButton.textContent = 'Replay';
+    }
     resetButton.addEventListener('click',()=>this.clearBoard());
     this.controls.appendChild(resetButton);
+
   },
 
 };

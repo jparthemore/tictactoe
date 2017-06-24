@@ -34,9 +34,7 @@
 }
 
 .controls-space{
-  padding-top: 48px;
   text-align: center;
-
 }
 .btn{
   background-color: lightgray;
@@ -50,4 +48,14 @@
   font-size: 36px;
   color: darkblue;
   padding: 18px;
+}
+.banner-space{
+  margin: 48px 96px;
+}
+.display-bar{
+  background:#769bff;
+  border-top: 4px solid #06f;
+  border-bottom: 4px solid #06f;
+  text-align: center;
+  font-size: 48px;
 }
