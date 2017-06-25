@@ -16,7 +16,7 @@
 }
 .row-squares{
   height: 150px;
-  text-align: center;
+  text-align: center; /*this keeps what is in each .row-squares centered on page*/
 }
 .claimed-by-X{
   background-color: cornflowerblue;
@@ -24,7 +24,7 @@
 }
 .claimed-by-O{
   background-color: lightsteelblue;
-  border-color: dodgerblue;/*deepskyblue*/
+  border-color: dodgerblue;
 }
 .unclaimed{
 }
@@ -33,10 +33,8 @@
   background-color: hotpink;
 }
 
-.controls-space{
-  padding-top: 48px;
-  text-align: center;
-
+.controls{
+  text-align: center; /*this centers button on page*/
 }
 .btn{
   background-color: lightgray;
@@ -50,4 +48,14 @@
   font-size: 36px;
   color: darkblue;
   padding: 18px;
+}
+.banner-space{
+  margin: 48px 96px; 
+}
+.display-bar{
+  background:#769bff;
+  border-top: 4px solid #06f;
+  border-bottom: 4px solid #06f;
+  text-align: center; /*this centers text within the display-bar*/
+  font-size: 48px;
 }
