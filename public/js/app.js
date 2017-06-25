@@ -19,7 +19,6 @@ const App = {
     this.root = document.querySelector(this.rootElement);
     this.boardLayout = document.querySelector('.squares-layout');
     this.controls = document.querySelector('.controls');
-    this.banner = document.querySelector('.banner-space');
   },
 
   makeBoard: function(){
@@ -131,7 +130,6 @@ const App = {
     //clear out before re-rendering!
     this.boardLayout.innerHTML = '';
     this.controls.innerHTML = '';
-    this.banner.innerHTML = '';
 
     //draw grid
     this.board.forEach((row,rowIdx)=>{
@@ -148,10 +146,10 @@ const App = {
     //if winner display banner
     console.log('winning player is: ',this.winningPlayer);
     if(this.winningPlayer.length > 0){
-      const displayBar = document.createElement('div');
-      displayBar.classList.add('display-bar');
-      displayBar.textContent = "Game over!! " + this.winningPlayer + " has won!!!";
-      this.banner.appendChild(displayBar);
+       const displayBar = document.createElement('div');
+       displayBar.classList.add('display-bar');
+       displayBar.textContent = "Game over!! " + this.winningPlayer + " has won!!!";
+       this.boardLayout.appendChild(displayBar);
     }
 
     //create a 'reset' button
@@ -164,7 +162,6 @@ const App = {
     }
     resetButton.addEventListener('click',()=>this.clearBoard());
     this.controls.appendChild(resetButton);
-
   },
 
 };
