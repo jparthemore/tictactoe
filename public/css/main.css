@@ -1,3 +1,6 @@
+.squares-layout{
+  position: relative;
+}
 .btn-square{
   background-color: lightgray;
   width:150px;
@@ -35,6 +38,7 @@
 
 .controls{
   text-align: center; /*this centers button on page*/
+  margin: 48px;
 }
 .btn{
   background-color: lightgray;
@@ -49,13 +53,24 @@
   color: darkblue;
   padding: 18px;
 }
-.banner-space{
-  margin: 48px 96px; 
-}
+
 .display-bar{
+  /*margin: 48px 96px;*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  /*https://stackoverflow.com/questions/4463308/position-absolute-div-in-center-of-screen-view*/
+  /*https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/*/
+  transform: translate(-50%, -50%);
   background:#769bff;
   border-top: 4px solid #06f;
   border-bottom: 4px solid #06f;
   text-align: center; /*this centers text within the display-bar*/
   font-size: 48px;
+}
+
+.hide-it{
+  visibility:hidden;
+  transition: all 0.15s ease-out;
 }
