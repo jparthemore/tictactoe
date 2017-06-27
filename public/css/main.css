@@ -26,14 +26,24 @@
   border-color: dodgerblue;
 }
 .claimed-by-O{
-  background-color: lightsteelblue;
-  border-color: dodgerblue;
+  background-color: #49e03f;
+  border-color: #39e32e;
 }
 .unclaimed{
+  cursor: pointer;
+}
+.unclaimed:hover{
+  background-color: darkgrey;
 }
 .winner-square{
-  border-color: deeppink;
-  background-color: hotpink;
+  border-color:#ec3232;
+  background-color: #f25c5c;
+}
+.unclaimed.disable-square{
+  cursor: auto;
+}
+.unclaimed.disable-square:hover{
+  background-color: lightgray;
 }
 
 .controls{

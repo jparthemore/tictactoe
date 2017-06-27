@@ -17,6 +17,10 @@ Square.prototype.toHtml = function(){
   }
   else{
     btn.classList.add('unclaimed');
+    if(this.isUnclaimedUnusedSquare){
+      btn.classList.add('disable-square');
+      btn.disabled = 'true';
+    }
   }
   if(this.isWinningSquare){
     btn.classList.add('winner-square');
