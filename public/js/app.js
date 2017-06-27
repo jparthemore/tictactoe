@@ -34,13 +34,14 @@ const App = {
   bindEvents: function(){},
 
   claimSquare: function(rowIdx,colIdx){
-    if(this.winningPlayer.length > 0) return; //ignore click events if game over!
-
     if(this.board[rowIdx][colIdx].owner.length === 0){
       this.board[rowIdx][colIdx].owner = this.activePlayer;
     }
 
     this.checkForWin();
+    if(this.winningPlayer.length >0 ){
+      this.findUnclaimedUnusedSquares();
+    }
     this.render();
 
     if(this.activePlayer==='X'){
@@ -125,6 +126,17 @@ const App = {
         this.board[2][0].isWinningSquare = 'true';
     }
   },
+ //need to know which squares were never used after game is won
+  findUnclaimedUnusedSquares: function(){
+    for(let i=0;i<this.numRows;i++){
+      for(let j=0;j<this.numCols;j++){
+        if(this.board[i][j].owner.length === 0){
+          this.board[i][j].isUnclaimedUnusedSquare = 'true';
+        }
+      }
+    }
+  },
+
   render: function(){
 
     //clear out before re-rendering!
