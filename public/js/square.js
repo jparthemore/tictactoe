@@ -17,7 +17,7 @@ Square.prototype.toHtml = function(){
   }
   else{
     btn.classList.add('unclaimed');
-    if(this.isUnclaimedUnusedSquare){
+    if(this.isUnusedSquare){
       btn.classList.add('disable-square');
       btn.disabled = 'true';
     }
