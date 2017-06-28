@@ -6,6 +6,7 @@ const App = {
   numCols: 3,
   activePlayer: 'X',
   winningPlayer: '',
+  isGameOver: false,
   board: [],
 
   start: function(){
@@ -40,7 +41,11 @@ const App = {
 
     this.checkForWin();
     if(this.winningPlayer.length >0 ){
-      this.findUnclaimedUnusedSquares();
+      this.isGameOver = 'true';
+      this.findUnusedSquares();
+    }
+    if (this.winningPlayer.length === 0){
+      this.checkForTie();
     }
     this.render();
 
@@ -55,6 +60,7 @@ const App = {
   clearBoard: function(){
     this.activePlayer = 'X';
     this.winningPlayer = '';
+    this.isGameOver = 'false';
     this.makeBoard();
     this.render();
   },
@@ -127,14 +133,29 @@ const App = {
     }
   },
  //need to know which squares were never used after game is won
-  findUnclaimedUnusedSquares: function(){
+  findUnusedSquares: function(){
     for(let i=0;i<this.numRows;i++){
       for(let j=0;j<this.numCols;j++){
         if(this.board[i][j].owner.length === 0){
-          this.board[i][j].isUnclaimedUnusedSquare = 'true';
+          this.board[i][j].isUnusedSquare = 'true';
         }
       }
     }
+  },
+
+  checkForTie: function(){
+    for(let i=0;i<this.numRows;i++){
+      for(let j=0;j<this.numCols;j++){
+        if(this.board[i][j].owner.length === 0){
+          return;
+        }
+      }
+    }
+    //if all squares are owned and no winner - we have a tie! (game is over)
+    if (this.winningPlayer.length ===0){
+      this.isGameOver = 'true';
+    }
+    return;
   },
 
   render: function(){
@@ -155,11 +176,16 @@ const App = {
       this.boardLayout.appendChild(rowOfSquares);
     });
 
-    //if winner display banner
-    if(this.winningPlayer.length > 0){
+    //if game over display banner
+    if(this.isGameOver === 'true'){
        const displayBar = document.createElement('div');
        displayBar.classList.add('display-bar');
-       displayBar.textContent = "Game over!! " + this.winningPlayer + " has won!!!";
+       if (this.winningPlayer.length > 0){
+         displayBar.innerHTML = "Game over!! " + this.winningPlayer + " has won!!!\&#x263A";
+       }
+       else{
+         displayBar.innerHTML = "Draw!! NO Winner \&#x2639";
+       }
        this.boardLayout.appendChild(displayBar);
        //this.showBanner(displayBar);
        setTimeout(function(){
@@ -182,7 +208,7 @@ const App = {
   //see https://codepen.io/arosenb2/pen/Hdbna
   // showBanner: function (displayBar){
   //   setTimeout(function(){
-  //     displayBar.classList.add('hide-it');
+  //     displayBar..add('hide-it');
   //   },2000);
   //   return false;
   // }
